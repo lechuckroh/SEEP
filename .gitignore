@@ -1,3 +1,10 @@
+.DS_Stores
+
+# IDE
+.idea
+.vscode
+
+# Elixir
 /_build
 /cover
 /deps
