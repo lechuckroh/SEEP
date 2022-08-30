@@ -1,7 +1,7 @@
-import type { Component } from 'solid-js';
-import { Link, useRoutes, useLocation } from 'solid-app-router';
+import { Link, useLocation, useRoutes } from "@solidjs/router";
+import { Component } from "solid-js";
 
-import { routes } from './routes';
+import { routes } from "./routes";
 
 const App: Component = () => {
   const location = useLocation();
@@ -17,12 +17,18 @@ const App: Component = () => {
             </Link>
           </li>
           <li class="py-2 px-4">
-            <Link href="/about" class="no-underline hover:underline">
+            <Link
+              href="/about"
+              class="no-underline hover:underline"
+            >
               About
             </Link>
           </li>
           <li class="py-2 px-4">
-            <Link href="/error" class="no-underline hover:underline">
+            <Link
+              href="/error"
+              class="no-underline hover:underline"
+            >
               Error
             </Link>
           </li>

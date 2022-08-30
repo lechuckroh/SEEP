@@ -2,12 +2,12 @@
 import 'windi.css';
 
 import { render } from 'solid-js/web';
-import { Router } from 'solid-app-router';
+import { Router } from '@solidjs/router';
 import App from './app';
 
 render(
   () => (
-    <Router>
+    <Router base={import.meta.env.BASE_URL}>
       <App />
     </Router>
   ),
