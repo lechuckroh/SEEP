@@ -1,0 +1,57 @@
+version: '3'
+
+vars:
+  FE_BUILD_DIR: frontend/dist
+  FE_PUBLIC_DIR: priv/static/webapp
+
+tasks:
+  install-edgedb:
+    - brew tap edgedb/tap
+    - brew install edgedb-cli
+
+  init-db:
+    dir: db
+    cmds:
+      - edgedb project init --non-interactive
+  
+  migration-create:
+    dir: db
+    cmds:
+      - edgedb migration create
+
+  migrate-db:
+    dir: db
+    cmds:
+      - edgedb migrate
+
+  install-phoenix:
+    - brew install elixir
+    - mix local.hex
+    - mix local.rebar --force
+
+  dev-frontend:
+    dir: frontend
+    cmds:
+      - yarn dev
+
+  install-frontend:
+    dir: frontend
+    cmds:
+      - yarn install
+
+  build-frontend:
+    dir: frontend
+    cmds:
+      - yarn build
+
+  dist-frontend:
+    deps: [build-frontend]
+    cmds:
+      - rm -rf {{.FE_PUBLIC_DIR}}
+      - cp -R {{.FE_BUILD_DIR}} {{.FE_PUBLIC_DIR}}
+
+  deps-server:
+    - mix deps.get
+
+  dev-server:
+    - mix phx.server
